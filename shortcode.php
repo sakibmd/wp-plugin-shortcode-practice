@@ -21,7 +21,6 @@ function sc_shortcode_practice()
 }
 add_action("plugins_loaded", "sc_shortcode_practice"); //**sc = prefix
 
-
 function button_callback($args)
 {
     $default = array(
@@ -71,9 +70,9 @@ function gmap_callback($attributes)
 
     $default = array(
         'place' => 'Dhaka',
-        'width'=>'800',
-        'height'=>'500',
-        'zoom'=>'14'
+        'width' => '800',
+        'height' => '500',
+        'zoom' => '14',
     );
 
     $params = shortcode_atts($default, $attributes);
@@ -100,3 +99,20 @@ function enque_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'enque_scripts');
+
+function gitProfileCallback($attributes, $content = '')
+{
+    $default = array(
+        'username' => '',
+    );
+    $params = shortcode_atts($default, $attributes);
+
+    $profile = <<<EOD
+     
+         <a href="https://api.github.com/users/{$params['username']}" target="_blank"> Show Profile</a>
+    
+        
+    EOD;
+    return $profile;
+}
+add_shortcode('gitProfile', 'gitProfileCallback');
